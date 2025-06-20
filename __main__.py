@@ -6,12 +6,11 @@
 # В случае невозможности подключения веб-камеры опишите возможные пути решения проблемной ситуации.
 # Показать выбранное изображение в окне приложения.
 # Показать красный, зеленый или синий канал изображения. Пользователь сам выбирает канал.
-from cv2 import *
 from Interface import *
 
 def main():
     interface = Interface()
-    interface.openInterface()
+    interface.open_interface()
 
 if __name__ == "__main__":
     main()
