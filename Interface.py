@@ -1,9 +1,10 @@
 from tkinter import *
-from tkinter import filedialog,simpledialog
+from tkinter import filedialog, simpledialog
 from tkinter import ttk
 from PIL import Image, ImageTk, ImageFilter
 from editting import *
 from cv2 import *
+
 
 class Interface:
     def __init__(self, root=None):
@@ -12,6 +13,7 @@ class Interface:
             self.label = Label(self.root)
             self.label.pack()
             self.img = None
+            self.setup_window()
             self.work_menu()
         else:
             self.root = root
@@ -32,6 +34,28 @@ class Interface:
         main_menu.add_cascade(label="Изменить", menu=edit_menu)
         main_menu.add_cascade(label="Сделать фото")
         return main_menu
+
+    # n - индекс цвета
+    def channels(self, n):
+        photo = ImageTk.PhotoImage(self.img.split()[n])
+        self.label.config(image=photo)
+        self.label.image = photo
+
+    def image_channels_menu(self):
+        channels_menu = Menu(self.root)
+        channels_menu.add_command(
+            label="Синий",
+            command=lambda: self.channels(0)
+        )
+        channels_menu.add_command(
+            label="Зеленый",
+            command=lambda: self.channels(1)
+        )
+        channels_menu.add_command(
+            label="Красный",
+            command=lambda: self.channels(2)
+        )
+        return channels_menu
 
     def sharpness_up(self):
         if self.img:
@@ -76,14 +100,16 @@ class Interface:
         return edit_menu
 
     def work_file_menu(self):
+        channels_menu = self.image_channels_menu()
         file_menu = Menu(self.root)
-        file_menu.add_cascade(
+        file_menu.add_command(
             label="Открыть",
             command=lambda: self.png_file()
-            )
+        )
         file_menu.add_cascade(
-            label="Сохранить как",
-            command=lambda: self.save_file())
+            label="Каналы изображения",
+            menu=channels_menu
+        )
         return file_menu
 
     def png_file(self):
@@ -92,12 +118,12 @@ class Interface:
         )
         if file_path:
             self.img = Image.open(file_path)
-            #Подстраиваем ширину image под окно
+            # Подстраиваем ширину image под окно
             new_width = self.root.winfo_width()
-            #Параметры изображения
+            # Параметры изображения
             orig_width, orig_height = self.img.size
-            #Новая высота для изображения
-            new_height = int(orig_height * (new_width/orig_width))
+            # Новая высота для изображения
+            new_height = int(orig_height * (new_width / orig_width))
             resized_img = self.img.resize((new_width, new_height), Image.LANCZOS)
             photo = ImageTk.PhotoImage(resized_img)
             self.label.config(image=photo)
@@ -107,9 +133,5 @@ class Interface:
         pass
 
     def open_interface(self):
-        self.setup_window()
         self.root.mainloop()
 
-    def finish(self):
-        self.root.destroy()
-        print("Закрываемся")

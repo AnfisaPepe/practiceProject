@@ -8,9 +8,11 @@
 # Показать красный, зеленый или синий канал изображения. Пользователь сам выбирает канал.
 from Interface import *
 
+
 def main():
     interface = Interface()
     interface.open_interface()
+
 
 if __name__ == "__main__":
     main()
