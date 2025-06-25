@@ -2,6 +2,8 @@ from tkinter import *
 from tkinter import filedialog, simpledialog
 from tkinter import ttk
 from PIL import Image, ImageTk, ImageFilter
+from tkinter import messagebox
+from DrawGreenLine import DrawGreenLine
 from editting import *
 from cv2 import *
 
@@ -81,7 +83,17 @@ class Interface:
                 self.img = rotated
 
     def draw_line(self):
-        pass
+        if not self.img:
+            messagebox.showerror(
+                "Ошибка",
+                "Изображение не найдено"
+            )
+            return
+        else:
+            drawing_window = Toplevel(self.root)
+            drawing_window.title("Нарисовать линию")
+            drawing_window.geometry("400x300")
+            DrawGreenLine(self.img, self.root)
 
     def work_edit_menu(self):
         edit_menu = Menu(self.root)
@@ -95,7 +107,7 @@ class Interface:
         )
         edit_menu.add_command(
             label="Нарисовать линию на изображении зеленым цветом",
-            command=lambda: self.draw_line()
+            command=lambda: self.draw_line
         )
         return edit_menu
 
@@ -129,9 +141,5 @@ class Interface:
             self.label.config(image=photo)
             self.label.image = photo
 
-    def save_file(self):
-        pass
-
     def open_interface(self):
         self.root.mainloop()
-
