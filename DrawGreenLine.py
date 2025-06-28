@@ -4,13 +4,13 @@ from PIL import ImageDraw, ImageTk
 
 
 class DrawGreenLine:
-    def __init__(self, img, root):
+    def __init__(self, img, root, label_for_draw):
         self.frame = Frame(root)
         self.frame.pack(fill="both", expand=True)
         self.img = img.copy()
+
         self.draw = ImageDraw.Draw(self.img)
-        self.photo = ImageTk.PhotoImage(self.img)
-        self.label = Label(self.frame, image=self.photo)
+        self.label = label_for_draw
         self.label.pack()
         input_frame = Frame(self.frame)
         input_frame.pack(pady=10)
@@ -30,6 +30,7 @@ class DrawGreenLine:
         Label(input_frame, text="y2:").pack(side=LEFT, padx=2)
         self.y2 = Entry(input_frame, width=5)
         self.y2.pack(side=LEFT)
+
         Label(input_frame, text="Толщина").pack(side=LEFT, padx=2)
         self.entry_width = Entry(input_frame, width=5)
         self.entry_width.pack(side=LEFT)
@@ -53,9 +54,9 @@ class DrawGreenLine:
                 fill="green",
                 width=entry_width
             )
-            self.photo = ImageTk.PhotoImage(self.img)
-            self.label.image = self.photo
-            self.label.config(image=self.photo)
+            photo = ImageTk.PhotoImage(self.img)
+            self.label.image = photo
+            self.label.config(image=photo)
         except ValueError:
             messagebox.showerror(
                 "Ошибка",

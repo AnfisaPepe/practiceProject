@@ -39,9 +39,10 @@ class Interface:
 
     # n - индекс цвета
     def channels(self, n):
-        photo = ImageTk.PhotoImage(self.img.split()[n])
-        self.label.config(image=photo)
-        self.label.image = photo
+        if self.img:
+            photo = ImageTk.PhotoImage(self.img.split()[n])
+            self.label.config(image=photo)
+            self.label.image = photo
 
     def image_channels_menu(self):
         channels_menu = Menu(self.root)
@@ -83,17 +84,8 @@ class Interface:
                 self.img = rotated
 
     def draw_line(self):
-        if not self.img:
-            messagebox.showerror(
-                "Ошибка",
-                "Изображение не найдено"
-            )
-            return
-        else:
-            drawing_window = Toplevel(self.root)
-            drawing_window.title("Нарисовать линию")
-            drawing_window.geometry("400x300")
-            DrawGreenLine(self.img, self.root)
+        if self.img:
+            DrawGreenLine(self.img, self.root, self.label)
 
     def work_edit_menu(self):
         edit_menu = Menu(self.root)
@@ -107,7 +99,7 @@ class Interface:
         )
         edit_menu.add_command(
             label="Нарисовать линию на изображении зеленым цветом",
-            command=lambda: self.draw_line
+            command=self.draw_line
         )
         return edit_menu
 
@@ -130,16 +122,25 @@ class Interface:
         )
         if file_path:
             self.img = Image.open(file_path)
-            # Подстраиваем ширину image под окно
-            new_width = self.root.winfo_width()
-            # Параметры изображения
-            orig_width, orig_height = self.img.size
-            # Новая высота для изображения
-            new_height = int(orig_height * (new_width / orig_width))
-            resized_img = self.img.resize((new_width, new_height), Image.LANCZOS)
+            resized_img = self.img_correct(self.img)
             photo = ImageTk.PhotoImage(resized_img)
             self.label.config(image=photo)
             self.label.image = photo
+
+    def img_correct(self, img):
+        # Подстраиваем ширину image под окно
+        new_width = self.root.winfo_width()
+        # Параметры изображения
+        orig_width, orig_height = img.size
+        # Новая высота для изображения
+        new_height = int(orig_height * (new_width / orig_width))
+        # Если высота изображения больше окна:
+        if new_height > self.root.winfo_height():
+            new_height = self.root.winfo_height()
+            new_width = int(orig_width * (new_height / orig_height))
+
+        resized_img = self.img.resize((new_width, new_height), Image.LANCZOS)
+        return resized_img
 
     def open_interface(self):
         self.root.mainloop()
