@@ -1,11 +1,8 @@
 from tkinter import *
 from tkinter import filedialog, simpledialog
-from tkinter import ttk
-from PIL import Image, ImageTk, ImageFilter
-from tkinter import messagebox
 from DrawGreenLine import DrawGreenLine
 from editting import *
-from cv2 import *
+from CameraCapture import CameraCapture
 
 
 class Interface:
@@ -34,7 +31,7 @@ class Interface:
         edit_menu = self.work_edit_menu()
         main_menu.add_cascade(label="Файл", menu=file_menu)
         main_menu.add_cascade(label="Изменить", menu=edit_menu)
-        main_menu.add_cascade(label="Сделать фото")
+        main_menu.add_command(label="Сделать фото", command=self.camera_capture)
         return main_menu
 
     # n - индекс цвета
@@ -141,6 +138,15 @@ class Interface:
 
         resized_img = self.img.resize((new_width, new_height), Image.LANCZOS)
         return resized_img
+
+    def camera_capture(self):
+        camera = CameraCapture(self.root)
+        camera.open_camera()
+        frame = camera.capture()
+        self.img = frame
+        photo = ImageTk.PhotoImage(self.img)
+        self.label.config(image=photo)
+        self.label.image = photo
 
     def open_interface(self):
         self.root.mainloop()
