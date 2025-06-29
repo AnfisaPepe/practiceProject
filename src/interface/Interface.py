@@ -1,8 +1,9 @@
 from tkinter import *
 from tkinter import filedialog, simpledialog
-from DrawGreenLine import DrawGreenLine
-from editting import *
-from CameraCapture import CameraCapture
+from tkinter import Label
+from PIL import Image, ImageFilter, ImageTk
+from src.draw_line.DrawGreenLine import DrawGreenLine
+from src.camera_capture.CameraCapture import CameraCapture
 
 
 class Interface:
@@ -19,7 +20,7 @@ class Interface:
 
     def setup_window(self):
         self.root.title("WORKING WITH IMAGES")
-        self.root.iconbitmap("favicon.ico")
+        self.root.iconbitmap("assets/favicon.ico")
         self.root.geometry("800x600+400+100")
         self.root.resizable(True, True)
         self.root.option_add("*tearOff", False)

@@ -5,10 +5,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2baf8aa5-f5e6-4a87-8c37-63ef2efe6a4b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/CameraCapture.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/favicon.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/camera_capture/CameraCapture.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/camera_capture/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/draw_line/DrawGreenLine.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/draw_line/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/interface/Interface.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/interface/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CameraWork.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Interface.py" beforeDir="false" afterPath="$PROJECT_DIR$/Interface.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CameraCapture.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DrawGreenLine.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Interface.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/__main__.py" beforeDir="false" afterPath="$PROJECT_DIR$/__main__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/editting.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_drawing_line.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/work_with_file.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
